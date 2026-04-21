@@ -11,7 +11,12 @@ export default function Hero({ onCtaClick }) {
         <section
             id="home"
             className="relative overflow-hidden grain"
-            style={{ height: 1000 }}
+            style={{
+                minHeight: "100svh",
+                height: 1000,
+                background:
+                    "radial-gradient(circle at top, rgba(12, 31, 79, 0.38) 0%, rgba(10, 10, 10, 0.88) 52%, #0a0a0a 100%)",
+            }}
             data-testid="hero"
         >
             {/* Video background */}
@@ -21,17 +26,31 @@ export default function Hero({ onCtaClick }) {
                 loop
                 muted
                 playsInline
-                className="absolute left-0 w-full h-auto object-cover z-0"
-                style={{ top: "20%" }}
+                className="absolute inset-0 w-full h-full object-cover object-center z-0"
                 data-testid="hero-video"
             />
-            <div className="absolute inset-0 bg-black/55 z-0" />
+            <div
+                className="absolute inset-0 z-0"
+                style={{
+                    background:
+                        "linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.42) 32%, rgba(0,0,0,0.58) 64%, rgba(10,10,10,0.88) 82%, #0a0a0a 100%)",
+                }}
+            />
             {/* Bottom gradient fade */}
             <div
                 className="absolute bottom-0 left-0 right-0 z-0 pointer-events-none"
                 style={{
-                    height: 320,
-                    background: "linear-gradient(to bottom, transparent, #0a0a0a)",
+                    height: 420,
+                    background:
+                        "linear-gradient(to bottom, rgba(10,10,10,0) 0%, rgba(10,10,10,0.45) 40%, rgba(10,10,10,0.85) 75%, #0a0a0a 100%)",
+                }}
+            />
+            <div
+                className="absolute bottom-0 left-0 right-0 z-0 pointer-events-none"
+                style={{
+                    height: 240,
+                    background:
+                        "linear-gradient(to top, rgba(24, 58, 142, 0.22) 0%, rgba(24, 58, 142, 0.08) 38%, rgba(24, 58, 142, 0) 100%)",
                 }}
             />
             {/* Top gradient fade so navbar reads */}
@@ -39,7 +58,7 @@ export default function Hero({ onCtaClick }) {
                 className="absolute top-0 left-0 right-0 z-0 pointer-events-none"
                 style={{
                     height: 180,
-                    background: "linear-gradient(to top, transparent, rgba(0,0,0,0.7))",
+                    background: "linear-gradient(to top, transparent, rgba(0,0,0,0.78))",
                 }}
             />
 

@@ -317,6 +317,6 @@ export const MEDIA = {
     hlsVideo: "https://stream.mux.com/r6pXRAJb3005XEEbl1hYU1x01RFJDSn7KQApwNGgAHHbU.m3u8",
     chessImg1: "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=1400&q=80",
     chessImg2: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=80",
-    chessVideo1: "/media/la-casona-pasta.mov",
-    chessVideo2: "/media/la-casona-pizza.mov",
+    chessVideo1: "https://fqowcvdl75xz5i2f.public.blob.vercel-storage.com/la-casona-pasta.mp4",
+    chessVideo2: "https://fqowcvdl75xz5i2f.public.blob.vercel-storage.com/la-casona-pizza.mp4",
 };
