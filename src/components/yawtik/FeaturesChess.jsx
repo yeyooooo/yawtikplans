@@ -5,6 +5,7 @@ import { useLang, MEDIA } from "./i18n";
 
 function Row({ reverse, title, body, cta, img, videoSrc, label, onCtaClick, index }) {
     const [videoFailed, setVideoFailed] = useState(false);
+    const [videoReady, setVideoReady] = useState(false);
 
     return (
         <motion.div
@@ -31,7 +32,12 @@ function Row({ reverse, title, body, cta, img, videoSrc, label, onCtaClick, inde
                 </button>
             </div>
             <div className="liquid-glass rounded-none overflow-hidden relative h-[340px] md:h-[460px]">
-                <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" />
+                <img
+                    src={img}
+                    alt=""
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${videoReady && !videoFailed ? "opacity-0" : "opacity-100"}`}
+                    loading="lazy"
+                />
                 {videoSrc && !videoFailed ? (
                     <video
                         src={videoSrc}
@@ -41,12 +47,14 @@ function Row({ reverse, title, body, cta, img, videoSrc, label, onCtaClick, inde
                         muted
                         playsInline
                         preload="metadata"
-                        className="absolute inset-0 w-full h-full object-cover"
+                        className={`absolute inset-0 z-10 w-full h-full object-cover transition-opacity duration-500 ${videoReady ? "opacity-100" : "opacity-0"}`}
+                        onLoadedData={() => setVideoReady(true)}
+                        onCanPlay={() => setVideoReady(true)}
                         onError={() => setVideoFailed(true)}
                     />
                 ) : null}
-                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent mix-blend-overlay" />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white/70 text-[10px] font-body font-bold uppercase tracking-widest">
+                <div className="absolute inset-0 z-20 bg-gradient-to-tr from-primary/20 via-transparent to-transparent mix-blend-overlay" />
+                <div className="absolute bottom-4 left-4 right-4 z-30 flex items-center justify-between text-white/70 text-[10px] font-body font-bold uppercase tracking-widest">
                     <span>{label}</span>
                     <span className="flex items-center gap-1.5">
                         <span className="inline-block w-1.5 h-1.5 bg-primary animate-pulse" />
