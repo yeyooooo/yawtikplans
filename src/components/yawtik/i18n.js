@@ -283,19 +283,28 @@ export const translations = {
     },
 };
 
-const LangCtx = createContext({ lang: "en", t: translations.en, setLang: () => {} });
+const DEFAULT_LANG = "es";
+const LANG_STORAGE_KEY = "yawtik-lang-v2";
+
+const LangCtx = createContext({
+    lang: DEFAULT_LANG,
+    t: translations[DEFAULT_LANG],
+    setLang: () => {},
+});
 
 export function LanguageProvider({ children }) {
     const [lang, setLangState] = useState(() => {
-        if (typeof window === "undefined") return "en";
-        return localStorage.getItem("yawtik-lang") || "en";
+        if (typeof window === "undefined") return DEFAULT_LANG;
+        const storedLang = localStorage.getItem(LANG_STORAGE_KEY);
+        return storedLang && translations[storedLang] ? storedLang : DEFAULT_LANG;
     });
     useEffect(() => {
         document.documentElement.lang = lang;
-        localStorage.setItem("yawtik-lang", lang);
+        localStorage.setItem(LANG_STORAGE_KEY, lang);
+        localStorage.removeItem("yawtik-lang");
     }, [lang]);
     const setLang = useCallback((l) => setLangState(l), []);
-    const value = { lang, setLang, t: translations[lang] };
+    const value = { lang, setLang, t: translations[lang] || translations[DEFAULT_LANG] };
     return <LangCtx.Provider value={value}>{children}</LangCtx.Provider>;
 }
 
